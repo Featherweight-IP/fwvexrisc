@@ -121,16 +121,8 @@
 // FN_WriteStr: Add code here to write a string to IO
 // FN_WriteNmbr: Add code here to write a number (32/64bits) to IO
 FN_WriteStr: \
-	nop; \
-	nop; \
-	nop; \
-	nop; \
     ret; \
 FN_WriteNmbr: \
-	nop; \
-	nop; \
-	nop; \
-	nop; \
     ret;
 
 //RVTEST_IO_ASSERT_SFPR_EQ

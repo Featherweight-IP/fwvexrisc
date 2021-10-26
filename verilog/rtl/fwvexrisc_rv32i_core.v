@@ -1,6 +1,6 @@
 // Generator : SpinalHDL v1.6.0    git head : 73c8d8e2b86b45646e9d0b2e729291f2b65e6be3
 // Component : fwvexrisc_rv32i_core
-// Git hash  : d99d63a3822881eae5b53ba47c25fa9649b6043f
+// Git hash  : d85a880c2a0504e2f3b8935283f86cdf494ea789
 
 
 `define BranchCtrlEnum_binary_sequential_type [1:0]

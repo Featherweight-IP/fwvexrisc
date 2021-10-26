@@ -4,7 +4,6 @@ MKDV_TOOL ?= icarus
 RISCV_CC=riscv64-zephyr-elf-gcc
 
 MKDV_TIMEOUT := 8ms
-
 TOP_MODULE=fwvexrisc_rv32i_wb_tb
 
 SW_IMAGE ?= add-01.elf
@@ -33,4 +32,3 @@ include $(TEST_DIR)/../common/defs_rules.mk
 		-I$(PACKAGES_DIR)/riscv-compliance/riscv-test-env \
 		-static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles \
 		-T$(TEST_DIR)/../common/include/linkmono.ld
-
