@@ -1,0 +1,17 @@
+
+FWVEXRISC_VERILOG_DBGDIR := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
+
+ifneq (1,$(RULES))
+
+ifeq (,$(findstring $(FWVEXRISC_VERILOG_DBGDIR),$(MKDV_INCLUDED_DEFS)))
+PYBFMS_MODULES += riscv_debug_bfms
+MKDV_INCLUDED_DEFS += $(FWVEXRISC_VERILOG_DBGDIR)
+MKDV_VL_SRCS += $(wildcard $(FWVEXRISC_VERILOG_DBGDIR)/*.v)
+MKDV_VL_INCDIRS += $(FWRISC_VERILOG_DBGDIR)
+MKDV_VL_DEFINES += FWVEXRISC_DBG_BFM_MODULE=fwvexrisc_dbg_bfm
+endif
+
+else # Rules
+
+endif
+

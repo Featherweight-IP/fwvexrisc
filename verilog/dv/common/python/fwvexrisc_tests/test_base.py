@@ -7,6 +7,7 @@ import cocotb
 import pybfms
 from elftools.elf.elffile import ELFFile
 from elftools.elf.sections import SymbolTableSection
+from riscv_debug_bfms.riscv_debug_bfm import RiscvDebugBfm
 
 class TestBase(object):
     
@@ -18,12 +19,14 @@ class TestBase(object):
         await pybfms.init()
         
         self.u_sram = pybfms.find_bfm(".*u_sram")
+        self.u_dbg : RiscvDebugBfm = pybfms.find_bfm(".*", RiscvDebugBfm)
         
         if "sw.image" not in cocotb.plusargs.keys():
             raise Exception("+sw.image not specified")
         
+        self.u_dbg.load_elf(cocotb.plusargs["sw.image"])
         self.load_sw(cocotb.plusargs["sw.image"])
-        pass
+
     
     def load_sw(self, sw_image):
         with open(sw_image, "rb") as f:

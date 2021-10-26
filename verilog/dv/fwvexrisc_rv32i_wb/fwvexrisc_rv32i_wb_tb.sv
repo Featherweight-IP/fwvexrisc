@@ -36,7 +36,7 @@ module fwvexrisc_rv32i_wb_tb(input clock);
 	`include "iverilog_control.svh"
 `endif
 	
-	reg 		reset = 0;
+	reg 		reset /* verilator public */ = 0;
 	reg[5:0]	reset_cnt = 6'b0;
 	
 	always @(posedge clock) begin
