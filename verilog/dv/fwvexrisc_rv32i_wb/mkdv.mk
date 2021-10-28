@@ -3,7 +3,7 @@ TEST_DIR:=$(dir $(MKDV_MK))
 MKDV_TOOL ?= icarus
 RISCV_CC=riscv64-zephyr-elf-gcc
 
-MKDV_TIMEOUT := 8ms
+MKDV_TIMEOUT := 20ms
 TOP_MODULE=fwvexrisc_rv32i_wb_tb
 
 SW_IMAGE ?= add-01.elf

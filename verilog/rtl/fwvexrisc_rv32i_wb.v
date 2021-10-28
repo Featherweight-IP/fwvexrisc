@@ -36,7 +36,6 @@ module fwvexrisc_rv32i_wb(
 	wire		timerInterrupt = 0;
 	wire		softwareInterrupt = 0;
 	
-<<<<<<< HEAD
 	wire              rvfi_valid;
 	wire     [63:0]   rvfi_order;
 	wire     [31:0]   rvfi_insn;

@@ -79,6 +79,8 @@ object FWVexRiscRv32i extends App {
     )
   )
 
-  SpinalVerilog(cpu())
+//  SpinalConfig().addStandardMemBlackboxing(blackboxAllWhatsYouCan).generateVerilog(cpu())
+  SpinalConfig().generateVerilog(cpu())
+//  SpinalVerilog(cpu())
 }
 
