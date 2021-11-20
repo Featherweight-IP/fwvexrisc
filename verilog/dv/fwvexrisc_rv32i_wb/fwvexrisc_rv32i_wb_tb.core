@@ -1,0 +1,21 @@
+CAPI=2:
+
+name: featherweight-ip::fwvexrisc_rv32i_wb_tb:0.0.1
+description: Tmp
+
+filesets:
+  rtl:
+    files:
+      - fwvexrisc_rv32i_wb_tb.sv
+    file_type: verilogSource
+    depend:
+      - featherweight-ip::fwvexrisc
+      - featherweight-ip::fw-wishbone-interconnect
+      - featherweight-ip::fw-wishbone-sram-ctrl
+
+targets:
+  hdl:
+    filesets:
+      - rtl
+
+ 

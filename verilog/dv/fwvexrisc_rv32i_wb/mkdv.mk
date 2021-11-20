@@ -3,12 +3,21 @@ TEST_DIR:=$(dir $(MKDV_MK))
 MKDV_TOOL ?= icarus
 RISCV_CC=riscv64-zephyr-elf-gcc
 
+include $(TEST_DIR)/../common/defs_prefix.mk
+export PATH:=$(PACKAGES_DIR)/python/bin:$(PATH)
+VLNV:=featherweight-ip::fwvexrisc_rv32i_wb_tb
+FWVEXRISC_VL_SRCS := $(shell python3 -m mkdv files $(VLNV) hdl -l $(FWVEXRISC_DIR) -t verilogSource)
+FWVEXRISC_VL_INCS := $(shell python3 -m mkdv files $(VLNV) hdl -l $(FWVEXRISC_DIR) -t verilogSource -i)
+
+MKDV_VL_SRCS += $(FWVEXRISC_VL_SRCS)
+MKDV_VL_INCDIRS += $(FWVEXRISC_VL_INCS)
+
 MKDV_TIMEOUT := 20ms
 TOP_MODULE=fwvexrisc_rv32i_wb_tb
 
 SW_IMAGE ?= add-01.elf
 
-MKDV_VL_SRCS += $(TEST_DIR)/fwvexrisc_rv32i_wb_tb.sv
+#MKDV_VL_SRCS += $(TEST_DIR)/fwvexrisc_rv32i_wb_tb.sv
 VLSIM_CLKSPEC += clock=10ns
 VLSIM_OPTIONS += -Wno-fatal
 
