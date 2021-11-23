@@ -1,18 +1,23 @@
 
 job-group:
+  count: 1
   jobs:
     - job-group:
       name: vlsim
       tool: vlsim
       jobs:
-      - path: fwvexrisc_rv32i_wb/mkdv.yaml
+      - vlnv: featherweight-ip::fwvexrisc_rv32i_wb_tb
+        target: testplan
     - job-group:
       name: icarus
       tool: icarus
       jobs:
-      - path: fwvexrisc_rv32i_wb/mkdv.yaml
+      - vlnv: featherweight-ip::fwvexrisc_rv32i_wb_tb
+        target: testplan
     - job-group:
       name: questa
       tool: questa
       jobs:
-      - path: fwvexrisc_rv32i_wb/mkdv.yaml
+      - vlnv: featherweight-ip::fwvexrisc_rv32i_wb_tb
+        target: testplan
+

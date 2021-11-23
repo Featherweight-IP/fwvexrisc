@@ -14,6 +14,11 @@ filesets:
       - featherweight-ip::fw-wishbone-interconnect
       - featherweight-ip::fw-wishbone-sram-ctrl
 
+  testplan:
+    files:
+      - mkdv.yaml
+    file_type: testPlanYaml
+
 targets:
   default:
     filesets:
@@ -22,5 +27,9 @@ targets:
   hdl:
     filesets:
       - rtl
+
+  testplan:
+    filesets:
+      - testplan
 
  
