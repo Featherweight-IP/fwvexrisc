@@ -1,5 +1,6 @@
 
-jobs:
-    - riscv_compliance:
-        path: riscv_compliance.yaml
+job-group:
+  name: riscv_compliance
+  jobs:
+    - path: riscv_compliance.yaml
 

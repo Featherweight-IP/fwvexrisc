@@ -6,11 +6,15 @@ RISCV_CC=riscv64-zephyr-elf-gcc
 include $(TEST_DIR)/../common/defs_prefix.mk
 export PATH:=$(PACKAGES_DIR)/python/bin:$(PATH)
 VLNV:=featherweight-ip::fwvexrisc_rv32i_wb_tb
-FWVEXRISC_VL_SRCS := $(shell python3 -m mkdv files $(VLNV) hdl -l $(FWVEXRISC_DIR) -t verilogSource)
-FWVEXRISC_VL_INCS := $(shell python3 -m mkdv files $(VLNV) hdl -l $(FWVEXRISC_DIR) -t verilogSource -i)
+FWVEXRISC_VL_SRCS := $(shell python3 -m mkdv files $(VLNV) -l $(FWVEXRISC_DIR) -t verilogSource)
+FWVEXRISC_VL_INCS := $(shell python3 -m mkdv files $(VLNV) -l $(FWVEXRISC_DIR) -t verilogSource -i)
 
 MKDV_VL_SRCS += $(FWVEXRISC_VL_SRCS)
 MKDV_VL_INCDIRS += $(FWVEXRISC_VL_INCS)
+MKDV_VL_DEFINES += FWVEXRISC_DBG_BFM_MODULE=fwvexrisc_dbg_bfm
+#MKDV_VALGRIND=1
+#MKDV_GDB=1
+
 
 MKDV_TIMEOUT := 20ms
 TOP_MODULE=fwvexrisc_rv32i_wb_tb

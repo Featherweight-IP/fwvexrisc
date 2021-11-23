@@ -1,0 +1,15 @@
+CAPI=2:
+
+name: featherweight-ip::fwvexrisc_dbg:0.0.1
+description: Brings in software-debug support for FwVexRISC cores
+
+filesets:
+  hvl:
+    files:
+      - fwvexrisc_dbg_bfm.v
+    file_type: verilogSource
+    
+targets:
+  default:
+    filesets:
+      - hvl    

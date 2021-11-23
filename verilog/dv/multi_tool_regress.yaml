@@ -1,0 +1,18 @@
+
+job-group:
+  jobs:
+    - job-group:
+      name: vlsim
+      tool: vlsim
+      jobs:
+      - path: fwvexrisc_rv32i_wb/mkdv.yaml
+    - job-group:
+      name: icarus
+      tool: icarus
+      jobs:
+      - path: fwvexrisc_rv32i_wb/mkdv.yaml
+    - job-group:
+      name: questa
+      tool: questa
+      jobs:
+      - path: fwvexrisc_rv32i_wb/mkdv.yaml

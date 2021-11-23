@@ -10,10 +10,15 @@ filesets:
     file_type: verilogSource
     depend:
       - featherweight-ip::fwvexrisc
+      - featherweight-ip::fwvexrisc_dbg
       - featherweight-ip::fw-wishbone-interconnect
       - featherweight-ip::fw-wishbone-sram-ctrl
 
 targets:
+  default:
+    filesets:
+      - rtl
+      
   hdl:
     filesets:
       - rtl
