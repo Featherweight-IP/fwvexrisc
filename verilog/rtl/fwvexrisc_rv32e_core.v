@@ -1,5 +1,5 @@
 // Generator : SpinalHDL v1.6.0    git head : 73c8d8e2b86b45646e9d0b2e729291f2b65e6be3
-// Component : fwvexrisc_rv32i_core
+// Component : fwvexrisc_rv32e_core
 // Git hash  : 964a46df73e17c5a88b381411fd3dafad2217593
 
 
@@ -42,7 +42,7 @@
 `define Src1CtrlEnum_binary_sequential_URS1 2'b11
 
 
-module fwvexrisc_rv32i_core #(parameter RESET_VECTOR=32'h8000_0000) (
+module fwvexrisc_rv32e_core #(parameter RESET_VECTOR=32'h8000_0000) (
   output              rvfi_valid,
   output     [63:0]   rvfi_order,
   output     [31:0]   rvfi_insn,
@@ -666,12 +666,13 @@ module fwvexrisc_rv32i_core #(parameter RESET_VECTOR=32'h8000_0000) (
   wire       `ShiftCtrlEnum_binary_sequential_type _zz_decode_SHIFT_CTRL_2;
   wire       `BranchCtrlEnum_binary_sequential_type _zz_decode_BRANCH_CTRL_8;
   wire                when_RegFilePlugin_l63;
-  wire       [4:0]    decode_RegFilePlugin_regFileReadAddress1;
-  wire       [4:0]    decode_RegFilePlugin_regFileReadAddress2;
+  wire                when_RegFilePlugin_l66;
+  wire       [3:0]    decode_RegFilePlugin_regFileReadAddress1;
+  wire       [3:0]    decode_RegFilePlugin_regFileReadAddress2;
   wire       [31:0]   decode_RegFilePlugin_rs1Data;
   wire       [31:0]   decode_RegFilePlugin_rs2Data;
   reg                 lastStageRegFileWrite_valid /* verilator public */ ;
-  reg        [4:0]    lastStageRegFileWrite_payload_address /* verilator public */ ;
+  reg        [3:0]    lastStageRegFileWrite_payload_address /* verilator public */ ;
   reg        [31:0]   lastStageRegFileWrite_payload_data /* verilator public */ ;
   reg                 _zz_2;
   reg        [31:0]   execute_IntAluPlugin_bitwise;
@@ -965,7 +966,7 @@ module fwvexrisc_rv32i_core #(parameter RESET_VECTOR=32'h8000_0000) (
   reg [31:0] decode_to_execute_BRANCH_CTRL_string;
   `endif
 
-  reg [31:0] RegFilePlugin_regFile [0:31] /* verilator public */ ;
+  reg [31:0] RegFilePlugin_regFile [0:15] /* verilator public */ ;
 
   assign _zz_IBusSimplePlugin_jump_pcLoad_payload_1 = (_zz_IBusSimplePlugin_jump_pcLoad_payload & (~ _zz_IBusSimplePlugin_jump_pcLoad_payload_2));
   assign _zz_IBusSimplePlugin_jump_pcLoad_payload_2 = (_zz_IBusSimplePlugin_jump_pcLoad_payload - 2'b01);
@@ -1119,7 +1120,7 @@ module fwvexrisc_rv32i_core #(parameter RESET_VECTOR=32'h8000_0000) (
     end
   end
 
-  fwvexrisc_rv32i_core_StreamFifoLowLatency IBusSimplePlugin_rspJoin_rspBuffer_c (
+  fwvexrisc_rv32e_core_StreamFifoLowLatency IBusSimplePlugin_rspJoin_rspBuffer_c (
     .io_push_valid            (iBus_rsp_valid                                             ), //i
     .io_push_ready            (IBusSimplePlugin_rspJoin_rspBuffer_c_io_push_ready         ), //o
     .io_push_payload_error    (iBus_rsp_payload_error                                     ), //i
@@ -1906,6 +1907,9 @@ module fwvexrisc_rv32i_core #(parameter RESET_VECTOR=32'h8000_0000) (
     if(when_RegFilePlugin_l63) begin
       decode_REGFILE_WRITE_VALID = 1'b0;
     end
+    if(when_RegFilePlugin_l66) begin
+      decode_REGFILE_WRITE_VALID = 1'b0;
+    end
   end
 
   always @(*) begin
@@ -2559,8 +2563,9 @@ module fwvexrisc_rv32i_core #(parameter RESET_VECTOR=32'h8000_0000) (
   assign _zz_decode_BRANCH_CTRL_8 = _zz_decode_BRANCH_CTRL_2[24 : 23];
   assign _zz_decode_BRANCH_CTRL_1 = _zz_decode_BRANCH_CTRL_8;
   assign when_RegFilePlugin_l63 = (decode_INSTRUCTION[11 : 7] == 5'h0);
-  assign decode_RegFilePlugin_regFileReadAddress1 = decode_INSTRUCTION_ANTICIPATED[19 : 15];
-  assign decode_RegFilePlugin_regFileReadAddress2 = decode_INSTRUCTION_ANTICIPATED[24 : 20];
+  assign when_RegFilePlugin_l66 = decode_INSTRUCTION[11];
+  assign decode_RegFilePlugin_regFileReadAddress1 = decode_INSTRUCTION_ANTICIPATED[18 : 15];
+  assign decode_RegFilePlugin_regFileReadAddress2 = decode_INSTRUCTION_ANTICIPATED[23 : 20];
   assign decode_RegFilePlugin_rs1Data = _zz_RegFilePlugin_regFile_port0;
   assign decode_RegFilePlugin_rs2Data = _zz_RegFilePlugin_regFile_port1;
   always @(*) begin
@@ -2571,9 +2576,9 @@ module fwvexrisc_rv32i_core #(parameter RESET_VECTOR=32'h8000_0000) (
   end
 
   always @(*) begin
-    lastStageRegFileWrite_payload_address = _zz_rvfi_rs1_addr[11 : 7];
+    lastStageRegFileWrite_payload_address = _zz_rvfi_rs1_addr[10 : 7];
     if(_zz_2) begin
-      lastStageRegFileWrite_payload_address = 5'h0;
+      lastStageRegFileWrite_payload_address = 4'b0000;
     end
   end
 
@@ -3584,7 +3589,7 @@ module fwvexrisc_rv32i_core #(parameter RESET_VECTOR=32'h8000_0000) (
 
 endmodule
 
-module fwvexrisc_rv32i_core_StreamFifoLowLatency (
+module fwvexrisc_rv32e_core_StreamFifoLowLatency (
   input               io_push_valid,
   output              io_push_ready,
   input               io_push_payload_error,

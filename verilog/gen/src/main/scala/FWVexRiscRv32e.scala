@@ -6,7 +6,7 @@ import vexriscv.{plugin, VexRiscv, VexRiscvConfig}
 import spinal.core._
 
 
-object FWVexRiscRv32i extends App {
+object FWVexRiscRv32e extends App {
   def cpu() = new VexRiscv(
     config = VexRiscvConfig(
       plugins = List(
@@ -53,7 +53,8 @@ object FWVexRiscRv32i extends App {
         ),
         new RegFilePlugin(
           regFileReadyKind = plugin.SYNC,
-          zeroBoot = false
+          zeroBoot = false,
+          rv32e = true
         ),
         new IntAluPlugin,
         new SrcPlugin(

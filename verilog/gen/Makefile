@@ -4,6 +4,8 @@ PACKAGES_DIR := $(abspath $(GEN_DIR)/../../packages)
 all : gen
 
 CORE_SPECS += fwvexrisc_rv32i_core:fwvexrisc.FWVexRiscRv32i
+CORE_SPECS += fwvexrisc_rv32e_core:fwvexrisc.FWVexRiscRv32e
+CORE_SPECS += fwvexrisc_rv32emc_core:fwvexrisc.FWVexRiscRv32emc
 
 
 .PHONY: compile
@@ -27,6 +29,8 @@ gen:
 			echo "Process $$m"; \
 			sed -i -e "s/$${m}/$${module}_$${m}/g" VexRiscv.v; \
 		done; \
+		sed -i -e "s/module VexRiscv/module VexRiscv #(parameter RESET_VECTOR=32'h8000_0000)/g" \
+		       -e "s/32'h12345678/RESET_VECTOR/g" VexRiscv.v; \
 		sed -i -e "s/VexRiscv/$${module}/g" VexRiscv.v; \
 		cp VexRiscv.v ../rtl/$${module}.v; \
 	done
